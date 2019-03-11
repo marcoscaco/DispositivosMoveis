@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Aula1_m183387_v148167</string>
+    <string name="textViewInformacoesTela1">Digite dois numeros para serem computados</string>
+    <string name="AlturaText">Altura</string>
+    <string name="PesoText">Peso</string>
+</resources>

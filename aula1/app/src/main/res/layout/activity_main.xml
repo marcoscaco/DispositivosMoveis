@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="imc" type="br.unicamp.ft.m183387_v148167.aula1.IMC"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewnUMERO1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aluno" />
+
+        <EditText
+            android:id="@+id/editTextNumero1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textViewNumero1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Peso" />
+
+        <EditText
+            android:id="@+id/editTextNumero2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/buttonCalcule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CALCULE" />
+
+        <TextView
+            android:id="@+id/textViewIMCCalculado"
+            android:layout_width="match_parent"
+            android:layout_height="253dp"
+            android:text="IMC" />
+
+    </LinearLayout>
+</layout>
