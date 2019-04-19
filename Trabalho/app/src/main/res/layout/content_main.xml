@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/app_bar_main"
+        tools:context=".MainActivity" android:orientation="vertical">
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="274dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/imageView3"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="15"/>
+    <TextView
+            android:text="Nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textViewNome"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="15"/>
+    <TextView
+            android:text="Idade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textViewIdade"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="15"/>
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/spinnerRacas" android:entries="@array/racas"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="15"/>
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/spinner2" android:entries="@array/sexto"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+    <TextView
+            android:text="Descricao sobre + Nome do cachorro"
+            android:layout_width="match_parent"
+            android:layout_height="221dp" android:id="@+id/textViewDescricao"/>
+</LinearLayout>
