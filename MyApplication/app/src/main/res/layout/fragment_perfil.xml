@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".perfildogsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imageViewProfileAvatar"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerInside"
+        tools:src="@tools:sample/avatars[3]" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <EditText
+        android:id="@+id/editTextProfileNome"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Profile Name"
+        android:inputType="textEmailSubject|textPersonName"
+        android:text="Profile Name"
+        tools:text="Profile Name" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <EditText
+        android:id="@+id/editTextProfileLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="ProfileLocation"
+        android:inputType="number"
+        android:text="ProfileLocation"
+        tools:text="ProfileLocation" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="br.unicamp.ft.v148167_t177754.myapplication.listaCachorrosFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="35dp"
+    tools:context=".perfildogsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imageViewDogAvatar"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="@drawable/ic_launcher_background"
+        android:scaleType="centerInside"
+        tools:src="@tools:sample/avatars[3]" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <EditText
+        android:id="@+id/editTextDogNome"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Pet Nome"
+        android:inputType="textPersonName" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerDogSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/sexto" />
+
+        <EditText
+            android:id="@+id/editTextDogAge"
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="1 Ano"
+            android:ems="10"
+            android:hint="1 Ano"
+            android:inputType="text"
+            android:text="1 Ano"
+            tools:text="1 Ano" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <Spinner
+        android:id="@+id/spinnerRacas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/racas" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <EditText
+        android:id="@+id/editTextDogOverview"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:ems="10"
+        android:hint="Descreva seu Pet"
+        android:inputType="textMultiLine"
+        android:maxLength="300" />
+
+</LinearLayout>

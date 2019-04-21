@@ -10,11 +10,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.telecom.ConnectionRequest;
 import android.util.Log;
 import android.widget.ImageView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -37,30 +38,37 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import static br.unicamp.ft.v148167_t177754.myapplication.perfildogsFragment.*;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
+
+    //Gerenciador de fragmentos!
+    FragmentManager fragmentManager;
+    // Bundle para troca de informaçoes
+    private Bundle bundle;
+
+    //dados array com dados de racas
+    private ArrayList<String> racas;
+
 
     ImageView imageviewAvatar;
     private static final String IMAGE_DIRECTORY = "/demonuts";
     private int GALLERY = 1, CAMERA = 2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,16 +79,27 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        imageviewAvatar = findViewById(R.id.imageViewAvatar);
-        imageviewAvatar.setImageResource(R.drawable.avatardog);
-        imageviewAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPictureDialog();            }
-        });
+        // preenche dados array com dados de racas
+        racas = new ArrayList<String>();
+        racas = new ArrayList<String>(Arrays.asList((getResources().getStringArray(R.array.racas))));
+
+
+        //bundle
+        bundle = new Bundle();
+        bundle.putStringArrayList("racas", racas);
+
+        // fragmentaMnager
+        fragmentManager = getSupportFragmentManager();
+
+        MainFragment mainFragment = new MainFragment();
+        ReplaceFrag(mainFragment, "fragMain", bundle);
 
 
 
+    }
+    // retorna dados array com dados de racas
+    public ArrayList<String> getRacas(){
+        return this.racas;
     }
 
     @Override
@@ -109,12 +128,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -124,19 +137,55 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_slideshow) {
+            MainFragment mainFragment = new MainFragment();
+            ReplaceFrag(mainFragment, "fragMain", bundle);
+        } else if (id == R.id.nav_locateDogs) {
 
-        } else if (id == R.id.nav_manage) {
+            // prenche lista de dogs com dogs proximos que batem descricao
+            // array com dogs proximos
+            ArrayList<Dog> dogsProximos;
+            dogsProximos = new ArrayList<>();
+            dogsProximos.add(new Dog(R.drawable.avatardog, "Um cachorro muito fofo", "3 Anos", "Macho", "Poodle", "Fofinho"));
+            dogsProximos.add(new Dog(R.drawable.avatardog, "Um cachorro muito fofo Rottweller", "3 Anos", "Fêmea", "Rottweiler", "Fofinho"));
 
-        } else if (id == R.id.nav_share) {
+            Bundle locateDogsBundle = new Bundle();
+            locateDogsBundle.putStringArrayList("racas", racas);
+            //locateDogsBundle.putSerializable("dogsProximos", (Serializable) new Dog(R.drawable.avatardog, "Um cachorro muito fofo", "3 Anos", "Macho", "Poodle", "Fofinho"));
 
-        } else if (id == R.id.nav_send) {
+            locateFragment locateFragment = new locateFragment();
+            ReplaceFrag(locateFragment, "locateFrag", locateDogsBundle);
+        } else if (id == R.id.nav_profileUser) {
+            Bundle profileUSerBundle = new Bundle();
+            perfilFragment fragment = new perfilFragment();
+            ReplaceFrag(fragment, "fragPerfil", profileUSerBundle);
+        } else if (id == R.id.nav_newDog) {
+            Bundle newDogBundle = new Bundle();
+            perfildogsFragment fragDogs = new perfildogsFragment();
+            // Lista de 1 cachorro generico, inicia o fragmento em modo edit
+            ArrayList<Dog> dogenerico;
+            dogenerico = new ArrayList<>();
+            dogenerico.add(new Dog(R.drawable.avatardog, "", "? Anos", "", "", ""));
 
-        }
+            fragDogs.setDogs(dogenerico);
+            ReplaceFrag(fragDogs, "fragDogs", newDogBundle);
+        } else if (id == R.id.lista){
+            Bundle listaDogsBundle = new Bundle();
+            listaDogsBundle.putStringArrayList("racas", racas);
+            Toast toast = Toast.makeText(getBaseContext(), "toast", Toast.LENGTH_LONG);
+            toast.show();
+            listaCachorrosFragment listaCachorrosFragment = new listaCachorrosFragment();
+            // Lista de Cachorros que estão proximos
+            ArrayList<Dog> dogsProximos;
+            dogsProximos = new ArrayList<>();
+            dogsProximos.add(new Dog(R.drawable.avatardog, "Um cachorro muito fofo Rottweller", "3 Anos", "Fêmea", "Rottweiler", "Fofinho"));
+            dogsProximos.add(new Dog(R.drawable.avatardog, "Um cachorro muito fofo Rottweller", "3 Anos", "Fêmea", "Rottweiler", "Fofinho"));
+            dogsProximos.add(new Dog(R.drawable.avatardog, "Um cachorro muito fofo Rottweller", "3 Anos", "Fêmea", "Rottweiler", "Fofinho"));
+
+            listaCachorrosFragment.setDogs(dogsProximos);
+            ReplaceFrag(listaCachorrosFragment, "listadogsFrag", listaDogsBundle);
+        };
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -277,4 +326,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     // metodos para setar imagem
+
+
+    // metodo para setar o fragmento
+    private void ReplaceFrag(Fragment frag, String tag, Bundle bundle) {
+        frag.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragmentManager.findFragmentByTag(tag) != null){
+            fragmentTransaction.replace(R.id.frameLayoutMain, fragmentManager.findFragmentByTag(tag), tag);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+        else {
+            fragmentTransaction.replace(R.id.frameLayoutMain, frag, tag);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+    }
+    // metodo para setar fragmentos
 }
