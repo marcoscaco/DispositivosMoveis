@@ -159,6 +159,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_profileUser) {
             Bundle profileUSerBundle = new Bundle();
             perfilFragment fragment = new perfilFragment();
+
+            // Lista de 1 cachorro generico, inicia o fragmento em modo edit
+            ArrayList<Dog> dogenerico;
+            dogenerico = new ArrayList<>();
+            dogenerico.add(new Dog(R.drawable.avatardog, "", "? Anos", "", "", ""));
+
+            //fragment.setDogs(dogenerico);
             ReplaceFrag(fragment, "fragPerfil", profileUSerBundle);
         } else if (id == R.id.nav_newDog) {
             Bundle newDogBundle = new Bundle();
